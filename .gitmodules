@@ -1,0 +1,9 @@
+[submodule "lib/ogg"]
+	path = lib/ogg
+	url = https://gitlab.xiph.org/xiph/ogg
+[submodule "lib/opus"]
+	path = lib/opus
+	url = https://gitlab.xiph.org/xiph/opus
+[submodule "lib/opusfile"]
+	path = lib/opusfile
+	url = https://github.com/jackson-57/opusfile
