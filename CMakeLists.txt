@@ -49,6 +49,22 @@ add_subdirectory(lib/ogg)
 add_subdirectory(lib/opusfile)
 
 if (TOOLCHAIN STREQUAL "armgcc")
+	foreach(LOOP_TARGET opus ogg opusfile)
+		#	target_compile_definitions(${LOOP_TARGET} PUBLIC TARGET_PLAYDATE=1)
+		target_compile_options(${LOOP_TARGET} PUBLIC -Wall -Wno-unknown-pragmas -Wdouble-promotion)
+		target_compile_options(${LOOP_TARGET} PUBLIC $<$<CONFIG:DEBUG>:-O2>)
+		target_compile_options(${LOOP_TARGET} PUBLIC $<$<CONFIG:RELEASE>:-O2>)
+
+		target_compile_options(${LOOP_TARGET} PUBLIC ${MCFLAGS})
+		target_compile_options(${LOOP_TARGET} PUBLIC -falign-functions=16 -fomit-frame-pointer)
+		target_compile_options(${LOOP_TARGET} PUBLIC -gdwarf-2)
+		target_compile_options(${LOOP_TARGET} PUBLIC -fverbose-asm)
+		target_compile_options(${LOOP_TARGET} PUBLIC -ffunction-sections -fdata-sections)
+		target_compile_options(${LOOP_TARGET} PUBLIC -mword-relocations -fno-common)
+
+		target_compile_options(${LOOP_TARGET} PUBLIC $<$<COMPILE_LANGUAGE:CXX>:-fno-exceptions>)
+	endforeach()
+
 	target_link_libraries(${PLAYDATE_GAME_DEVICE} opusfile)
 else()
 	target_link_libraries(${PLAYDATE_GAME_NAME} opusfile)
