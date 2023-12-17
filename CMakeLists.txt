@@ -41,9 +41,15 @@ endif()
 
 include(${SDK}/C_API/buildsupport/playdate_game.cmake)
 
+set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
+
 set(OP_DISABLE_HTTP ON)
 set(OP_DISABLE_DOCS ON)
 set(OP_DISABLE_EXAMPLES ON)
+set(OP_FIXED_POINT ON)
+set(OPUS_NONTHREADSAFE_PSEUDOSTACK ON)
+set(OPUS_FIXED_POINT ON)
+set(OPUS_ENABLE_FLOAT_API OFF)
 add_subdirectory(lib/opus)
 add_subdirectory(lib/ogg)
 add_subdirectory(lib/opusfile)
